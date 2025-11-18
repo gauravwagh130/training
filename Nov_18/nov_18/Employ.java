@@ -40,7 +40,8 @@ public class Employ {
         return basic;
     }
 
-    public void setBasic(double basic) {
+    public Integer setBasic(double basic) {
         this.basic = basic;
+        return null;
     }
 }
