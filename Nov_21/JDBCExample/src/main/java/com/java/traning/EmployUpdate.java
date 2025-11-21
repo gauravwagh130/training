@@ -28,13 +28,14 @@ public class EmployUpdate {
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");
       Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/virtusa3", "root", "Wagh@1234");
-      String cmd = "update employ set Name = ?, Gender = ?, Dept = ?, Desig =?, Basic = ?";
+      String cmd = "update employ set Name = ?, Gender = ?, Dept = ?, Desig =?, Basic = ? where empno =?";
       PreparedStatement ps = conn.prepareStatement(cmd);
       ps.setString(1, name);
       ps.setString(2, gender);
       ps.setString(3, dept);
       ps.setString(4, desig);
       ps.setDouble(5, basic);
+      ps.setInt(6, empno);
       ps.executeUpdate();
       System.out.println("Record are Successfully Updated");
 
