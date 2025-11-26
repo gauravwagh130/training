@@ -4,20 +4,17 @@ import com.java.traning.Model.Member;
 import com.java.traning.exception.LibraryException;
 import com.java.traning.util.ConnectionHelper;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDaoImpl implements MemberDao{
   @Override
   public String addMember(Member m) throws LibraryException {
-    String sql = "INSERT INTO members(name, email) VALUES (?, ?, ?)";
+    String sql = "INSERT INTO members(name, email) VALUES (?, ?)";
     try {
       Connection conn = ConnectionHelper.getConnection();
-      PreparedStatement ps = conn.prepareStatement(sql);
+      PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
       ps.setString(1, m.getName());
       ps.setString(2, m.getEmail());
       ps.executeUpdate();
@@ -33,7 +30,6 @@ public class MemberDaoImpl implements MemberDao{
   @Override
   public Member findById(int memberId) throws LibraryException {
     String sql = "SELECT * FROM members WHERE member_id =?";
-    Member m = new Member();
     try {
       Connection conn = ConnectionHelper.getConnection();
       PreparedStatement ps = conn.prepareStatement(sql);

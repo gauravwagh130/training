@@ -9,10 +9,15 @@ public class Member {
 
   public Member(){};
 
-  public Member(String email, String name, int memberId) {
-    this.email = email;
-    this.name = name;
+  public Member(int memberId, String name, String email) {
     this.memberId = memberId;
+    this.name = name;
+    this.email = email;
+  }
+
+  public Member(String name, String email) {
+    this.name = name;
+    this.email = email;
   }
 
   public int getMemberId() {

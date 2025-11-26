@@ -30,9 +30,8 @@ public class BookDaoImpl implements BookDao{
   }
 
   @Override
-  public Book findByisbn(String isbn) {
-    String sql = "select * from where isbn = ?";
-    Book book = new Book();
+  public Book findByisbn(String isbn) throws LibraryException {
+    String sql = "select * from books where isbn = ?";
     try {
       Connection conn = ConnectionHelper.getConnection();
       PreparedStatement ps = conn.prepareStatement(sql);
@@ -41,17 +40,15 @@ public class BookDaoImpl implements BookDao{
       if (rs.next()){
         return mapRowToBook(rs);
       }
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    } catch (ClassNotFoundException e) {
-      throw new RuntimeException(e);
+    } catch (SQLException | ClassNotFoundException e) {
+      throw new LibraryException("Error fetching book by ISBN", e);
     }
     return null;
   }
 
   @Override
   public List<Book> searchByTitleOrAuthor(String term)  throws LibraryException {
-    String sql = "select * from book where title LIKE ?  or author LIKE ?";
+    String sql = "select * from books where title LIKE ?  or author LIKE ?";
     List<Book> list = new ArrayList<>();
     try {
       Connection conn = ConnectionHelper.getConnection();
@@ -90,20 +87,22 @@ public class BookDaoImpl implements BookDao{
 
   @Override
   public String updateBook(Book b) throws LibraryException {
-    String sql = "UPDATE books SET title = ?, author =?, total_copies = ?, availabel_copies=? WHERE isbn = ? ";
-    try {
-      Connection conn = ConnectionHelper.getConnection();
-      PreparedStatement ps = conn.prepareStatement(sql);
+    String sql = "UPDATE books SET title = ?, author = ?, total_copies = ?, available_copies = ? WHERE isbn = ?";
+    try (Connection conn = ConnectionHelper.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
       ps.setString(1, b.getTitle());
       ps.setString(2, b.getAuthor());
       ps.setInt(3, b.getTotalCopies());
       ps.setInt(4, b.getAvailableCopies());
       ps.setString(5, b.getIsbn());
-      ps.executeUpdate();
-    }  catch (SQLException | ClassNotFoundException e) {
-      throw new LibraryException("Error in updating book",e);
+      int affected = ps.executeUpdate();
+      if (affected == 0) {
+        return "No book found to update.";
+      }
+    } catch (SQLException | ClassNotFoundException e) {
+      throw new LibraryException("Error in updating book: " + e.getMessage(), e);
     }
-    return "Book are successfully Updated...";
+    return "Book updated successfully.";
   }
 
   @Override

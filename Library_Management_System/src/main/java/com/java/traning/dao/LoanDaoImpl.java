@@ -70,20 +70,22 @@ public class LoanDaoImpl implements LoanDao {
     return list;
   }
 
+
   @Override
   public String updateReturnDate(int loanId, LocalDate returnDate) throws LibraryException {
-    String sql = "UPDATE loans SET return_Date =?, WHERE loan_id=?";
-    try {
-      Connection conn = ConnectionHelper.getConnection();
-      PreparedStatement ps = conn.prepareStatement(sql);
+    String sql = "UPDATE loans SET return_date = ? WHERE loan_id = ?";
+    try (Connection conn = ConnectionHelper.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
       ps.setDate(1, Date.valueOf(returnDate));
       ps.setInt(2, loanId);
-      ps.executeUpdate();
+      int affected = ps.executeUpdate();
+      if (affected == 0) return "No loan found to update.";
     } catch (SQLException | ClassNotFoundException e) {
-      throw new LibraryException("Error",e);
+      throw new LibraryException("Error updating return date: " + e.getMessage(), e);
     }
-    return "Return Date are Updated...";
+    return "Return date updated successfully.";
   }
+
   private Loan mapRow (ResultSet rs) throws SQLException{
     Loan l = new Loan();
     l.setLoanId(rs.getInt("loan_id"));
