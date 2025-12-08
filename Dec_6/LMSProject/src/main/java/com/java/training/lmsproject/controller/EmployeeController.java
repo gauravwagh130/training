@@ -35,7 +35,4 @@ public class EmployeeController {
        String result = employeeService.addEmployee(employee);
        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
-
-
-
 }

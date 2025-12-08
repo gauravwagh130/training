@@ -91,21 +91,26 @@ public class LeaveDetailsService {
         if (daysLong <= 0) return "Invalid leave duration";
         if (daysLong > Integer.MAX_VALUE) return "Leave duration too large";
 
-        int noOfDays = (int) daysLong;
-
-        int balance = employee.getLeaveAvail();
-
-
-        System.out.println("DEBUG: Employee empId=" + employee.getEmpId()
-                + " balance=" + balance + " requestedDays=" + noOfDays);
-
-
-        if (noOfDays > balance) {
-            return "Insufficient leave balance. Available: " + balance + ", required: " + noOfDays;
+        int weekdays = 0;
+        for (LocalDate d = start; !d.isAfter(end); d = d.plusDays(1)) {
+            switch (d.getDayOfWeek()) {
+                case SATURDAY:
+                case SUNDAY:
+                    break;
+                default:
+                    weekdays++;
+            }
         }
 
-        employee.setLeaveAvail(balance - noOfDays);
-        leaveDetails.setNoOfDays(noOfDays);
+        if (weekdays <= 0) return "Requested range has no weekdays to charge";
+
+        int balance = employee.getLeaveAvail();
+        if (weekdays > balance)
+            return "Insufficient leave balance. Available: " + balance + ", required: " + weekdays;
+
+        // apply
+        employee.setLeaveAvail(balance - weekdays);
+        leaveDetails.setNoOfDays(weekdays);
         leaveDetails.setAppliedOn(new Date());
         leaveDetails.setLeaveStatus("PENDING");
 
