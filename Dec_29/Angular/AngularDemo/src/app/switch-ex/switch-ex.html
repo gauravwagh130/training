@@ -1,0 +1,13 @@
+<p>switch-ex works!</p>
+Enter Your Choice : 
+<input type="number" name="choice" [(ngModel)]="choice" />
+<br/><br/>
+<div [ngSwitch]="choice">
+    <div *ngSwitchCase="1">Hi I am Sunitha</div>
+    <div *ngSwitchCase="2">Hi I am Ragu</div>
+    <div *ngSwitchCase="3">Hi I am Sowmya</div>
+    <div *ngSwitchCase="4">Hi I am Sabari</div>
+    <div *ngSwitchCase="5">Hi I am Venkatesh</div>
+    <div *ngSwitchCase="6">Hi I am Prasanna</div>
+    <div *ngSwitchDefault="">Invalid Choice</div>
+</div>

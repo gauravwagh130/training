@@ -1,0 +1,17 @@
+<p>menu works!</p>
+
+<a [routerLink]="['/menu', { outlets: { Virtusa: ['one-way'] } }]"> One-Way</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a [routerLink]="['/menu', { outlets: { Virtusa: ['button-ex'] } }]"> ButtonEx</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a [routerLink]="['/menu', { outlets: { Virtusa: ['calculator'] } }]"> Calculator</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a [routerLink]="['/menu', { outlets: { Virtusa: ['condition'] } }]"> Condition</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a [routerLink]="['/menu', { outlets: { Virtusa: ['switch-ex'] } }]"> SwitchEx</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a [routerLink]="['/menu', { outlets: { Virtusa: ['employ-show'] } }]"> EmployShow</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<!-- Named Router Outlet -->
+<router-outlet name="Virtusa"></router-outlet>
