@@ -1,0 +1,16 @@
+<p>employ-search works!</p>
+
+Employ No : 
+<input type="number" name="empno" [(ngModel)]="empno" /> <br/><br/>
+<input type="button" value="Search" (click)="search()" />
+<hr/>
+<!-- Async user display -->
+<div *ngIf="employ | async as e;">
+  <p><b>Employ No :</b> {{ e.empno }}</p>
+  <p><b>Name:</b> {{ e.name }}</p>
+  <p><b>Gender :</b> {{ e.gender }}</p>
+  <p><b>Department :</b> {{ e.dept }}</p>
+   <p><b>Designation :</b> {{ e.desig }}</p>
+  <p><b>Salary  :</b> {{ e.basic }}</p>
+</div>
+

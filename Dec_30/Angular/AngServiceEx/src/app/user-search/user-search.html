@@ -1,0 +1,20 @@
+<h2>Search User</h2>
+
+<input
+  type="number"
+  placeholder="Enter User Id"
+  [(ngModel)]="id"
+/>
+<button (click)="show()">Search</button>
+
+<hr />
+
+<!-- Async user display -->
+<div *ngIf="user | async as u;">
+  <p><b>ID:</b> {{ u.id }}</p>
+  <p><b>Name:</b> {{ u.name }}</p>
+  <p><b>Username:</b> {{ u.username }}</p>
+  <p><b>Email:</b> {{ u.email }}</p>
+   <p><b>Phone:</b> {{ u.phone }}</p>
+  <p><b>Website:</b> {{ u.website }}</p>
+</div>

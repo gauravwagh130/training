@@ -1,0 +1,11 @@
+<p>menu works!</p>
+<a [routerLink]="['/menu',{outlets:{'virtusa':['usershow']}}]">User Show</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a [routerLink]="['/menu',{outlets:{'virtusa':['usersearch']}}]">User Search</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a [routerLink]="['/menu',{outlets:{'virtusa':['employshow']}}]">Employ Show</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a [routerLink]="['/menu',{outlets:{'virtusa':['employsearch']}}]">Employ Search</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<hr/>
+<router-outlet name="virtusa"></router-outlet>
