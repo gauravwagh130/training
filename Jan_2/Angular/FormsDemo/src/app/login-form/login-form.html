@@ -1,0 +1,21 @@
+<p>login-form works!</p>
+<form #loginForm="ngForm" (ngSubmit)="doLogin(loginForm)">
+    User Name : 
+    <input type="text" name="username"
+        [(ngModel)]="login.username" required #username="ngModel" /> 
+    <div *ngIf="username.invalid && loginForm.submitted && !isvalid">
+        <p style="color: red;">
+            Please Enter User Name...
+        </p>
+    </div>
+    <br/><br/>
+    User Name : 
+    <input type="password" name="passcode"
+        [(ngModel)]="login.passcode" required #passcode="ngModel" /> 
+    <div *ngIf="passcode.invalid && loginForm.submitted && !isvalid">
+        <p style="color: red;">
+            Please Enter Password...
+        </p>
+    </div>
+    <input type="submit" value="Login" />
+</form>

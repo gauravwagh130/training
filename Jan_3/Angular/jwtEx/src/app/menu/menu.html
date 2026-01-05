@@ -1,0 +1,12 @@
+<p>menu works!</p>
+
+<a [routerLink]="['/menu', { outlets: { virtusa: ['employAdd'] } }]">Add Employ</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a [routerLink]="['/menu', { outlets: { virtusa: ['generateToken'] } }]">Generate Token</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a [routerLink]="['/menu', { outlets: { virtusa: ['employShow'] } }]">Show Employ</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a [routerLink]="['/menu', { outlets: { virtusa: ['showuser'] } }]">Show User</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<hr />
+<router-outlet name="virtusa"></router-outlet>

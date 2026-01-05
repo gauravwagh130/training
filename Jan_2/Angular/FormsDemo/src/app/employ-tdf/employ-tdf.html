@@ -1,0 +1,49 @@
+<p>employ-tdf works!</p>
+<form #employForm="ngForm" (ngSubmit)="show(employForm)">
+  Employ No :
+  <input type="number" name="empno" [(ngModel)]="employ.empno" required #empno="ngModel" />
+  <div *ngIf="empno.invalid && employForm.submitted && !isValid">
+    <p style="color: red">Please Enter Employ No...</p>
+  </div>
+  <br /><br />
+  Employ Name :
+  <input type="text" name="name" [(ngModel)]="employ.name" required #name="ngModel" />
+  <div *ngIf="name.invalid && employForm.submitted && !isValid">
+    <p style="color: red">Please Enter Employ Name...</p>
+  </div>
+  <br /><br />
+  Gender :
+  <select name="gender" [(ngModel)]="employ.gender" required>
+    <option value="" disabled selected>-- select gender</option>
+    <option value="MALE">Male</option>
+    <option value="FEMALE">FEMALE</option>
+  </select>
+  <br /><br />
+  <div *ngIf="!employ.gender && employForm.submitted && !isValid">
+    <p style="color: red">Please Enter Gender...</p>
+  </div>
+  Department :
+  <input type="text" name="dept" [(ngModel)]="employ.dept" required #dept="ngModel" /> <br /><br />
+  <div *ngIf="dept.invalid && employForm.submitted && !isValid">
+    <p style="color: red">Please Enter Department...</p>
+  </div>
+  Designation :
+  <input type="text" name="desig" [(ngModel)]="employ.desig" required #desig="ngModel" />
+  <br /><br />
+  <div *ngIf="desig.invalid && employForm.submitted && !isValid">
+    <p style="color: red">Please Enter Designation...</p>
+  </div>
+  <br /><br />
+  Basic :
+  <input type="number" name="basic" [(ngModel)]="employ.basic" required #basic="ngModel" />
+  <div *ngIf="basic.invalid && employForm.submitted && !isValid">
+    <p style="color: red">Please Enter Employ Salary...</p>
+  </div>
+  <br /><br />
+
+  <input type="submit" value="Show" />
+</form>
+<hr />
+<p style="color: green">
+  {{ msg }}
+</p>
